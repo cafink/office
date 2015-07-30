@@ -92,7 +92,7 @@ abstract class Record {
 		// We already limited the results to a single record in our
 		// query, but it still comes back in a single-element array.
 		if ($first)
-			return $instances[0];
+			return isset($instances[0]) ? $instances[0] : null;
 
 		return $instances;
 	}
