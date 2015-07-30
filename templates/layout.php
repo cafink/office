@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/office.css">
 		<title><?php if(isset($page['title'])) echo $page['title'] . ' - '; ?>Office Scheduler</title>
 	</head>
 	<body>
