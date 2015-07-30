@@ -23,6 +23,13 @@ abstract class Record {
 		return new static($data);
 	}
 
+	protected static function instantiateArray ($data) {
+		$instances = array();
+		foreach($data as $datum)
+			$instances[] = self::instantiate($datum);
+		return $instances;
+	}
+
 	// Build a SQL query from field names & values
 	protected static function buildQuery ($fields = null, $values = null, $first = false) {
 
@@ -85,9 +92,7 @@ abstract class Record {
 		$sql = self::buildQuery($fields, $values, $first);
 		$results = self::query($sql);
 
-		$instances = array();
-		foreach ($results as $result)
-			$instances[] = self::instantiate($result);
+		$instances = self::instantiateArray($results);
 
 		// We already limited the results to a single record in our
 		// query, but it still comes back in a single-element array.
