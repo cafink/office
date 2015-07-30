@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/config.php';
+
 class RecordException extends Exception { }
 class DatabaseException extends RecordException { }
 
