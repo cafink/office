@@ -11,7 +11,7 @@ abstract class Record {
 	protected $record;
 
 	// The name of the database table.
-	protected $table;
+	protected static $table;
 
 	function __construct ($record = null) {
 		$this->record = (is_null($record) ? array() : $record);
@@ -19,13 +19,14 @@ abstract class Record {
 	}
 
 	// Create a record instance from an associative array.
-	protected function instantiate ($data) {
-		return new $this($data);
+	protected static function instantiate ($data) {
+		return new static($data);
 	}
 
 	// Build a SQL query from field names & values
-	protected function buildQuery ($fields = null, $values = null, $first = false) {
-		$sql = "SELECT * FROM {$this->table}";
+	protected static function buildQuery ($fields = null, $values = null, $first = false) {
+
+		$sql = 'SELECT * FROM ' . static::$table;
 
 		if (!empty($fields)) {
 
@@ -50,7 +51,7 @@ abstract class Record {
 	}
 
 	// Run a query; return results as array of records.
-	public function query ($sql) {
+	public static function query ($sql) {
 
 		if (!isset($GLOBALS['config']['db']))
 			throw new DatabaseException('Database connection information not provided.');
@@ -79,20 +80,25 @@ abstract class Record {
 	}
 
 	// Find records by field names & values.
-	public function find ($fields = null, $values = null, $first = false) {
+	public static function find ($fields = null, $values = null, $first = false) {
 
-		$sql = $this->buildQuery($fields, $values, $first);
-		$results = $this->query($sql);
+		$sql = self::buildQuery($fields, $values, $first);
+		$results = self::query($sql);
 
 		$instances = array();
 		foreach ($results as $result)
-			$instances[] = $this->instantiate($result);
+			$instances[] = self::instantiate($result);
+
+		// We already limited the results to a single record in our
+		// query, but it still comes back in a single-element array.
+		if ($first)
+			return $instances[0];
 
 		return $instances;
 	}
 
 	// Get a single record by id.
-	public function get ($id) {
+	public static function get ($id) {
 		return $this->find('id', $id, true);
 	}
 
