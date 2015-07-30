@@ -11,7 +11,7 @@ abstract class Record {
 	protected $record;
 
 	// The name of the database table.
-	protected static $table;
+	public static $table;
 
 	function __construct ($record = null) {
 		$this->record = (is_null($record) ? array() : $record);
