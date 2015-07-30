@@ -6,11 +6,9 @@ class User extends Record {
 
 	protected static $table = 'users';
 
-	static function checkPassword ($email, $password) {
+	function checkPassword ($password) {
 
-		$user = self::find('email', $email, true);
-
-		if (!empty($user) && $user->password == $password)
+		if ($this->password == $password)
 			return true;
 
 		return false;
