@@ -1,8 +1,12 @@
-<?php ob_start(); ?>
+<?php
+	include 'lib/User.php';
+	include 'lib/requireLogin.php';
+	ob_start();
+?>
 
-<p>Hello, world!</p>
+<p>Hello, <?php echo $_SESSION['user']->first_name; ?></p>
 
 <?php
 	$page['content'] = ob_get_clean();
-	include 'layout.php';
+	include 'templates/layout.php';
 ?>
