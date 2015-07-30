@@ -20,9 +20,8 @@
 		$errors = 'Invalid username/password combination.';
 	}
 
+	ob_start();
 ?>
-
-<?php ob_start(); ?>
 
 <h1>Log In</h1>
 
