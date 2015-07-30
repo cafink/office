@@ -86,13 +86,16 @@ abstract class Record {
 		return $results;
 	}
 
+	// Run a query; return results as a record instance.
+	public static function queryInstantiate ($sql) {
+		return self::instantiateArray(self::query($sql));
+	}
+
 	// Find records by field names & values.
 	public static function find ($fields = null, $values = null, $first = false) {
 
 		$sql = self::buildQuery($fields, $values, $first);
-		$results = self::query($sql);
-
-		$instances = self::instantiateArray($results);
+		$instances = self::queryInstantiate($sql);
 
 		// We already limited the results to a single record in our
 		// query, but it still comes back in a single-element array.
