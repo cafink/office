@@ -39,8 +39,7 @@
 		<input type="password" name="password" />
 	</div>
 
-	<div><input type="submit" name="submit" value="Login"></div>
-
+	<div><input type="submit" name="submit" value="Login" /></div>
 
 </form>
 
