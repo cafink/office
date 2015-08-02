@@ -33,7 +33,7 @@ abstract class Record {
 	// Build a SQL query from field names & values
 	protected static function buildQuery ($fields = null, $values = null, $first = false) {
 
-		$sql = 'SELECT * FROM ' . static::$table;
+		$sql = 'SELECT * FROM `' . static::$table . '`';
 
 		if (!empty($fields)) {
 
