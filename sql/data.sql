@@ -9,12 +9,12 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `color`, `passwor
 INSERT INTO `ping-pong` (`id`, `price`) VALUES
 (1, 5);
 
-INSERT INTO `seats` (`id`, `type`, `price`) VALUES
+INSERT INTO `seats` (`id`, `name`, `price`) VALUES
 (1, 'Middle',  5),
 (2, 'Aisle',  10),
 (3, 'Window', 15);
 
-INSERT INTO `offices` (`id`, `type`, `price`) VALUES
+INSERT INTO `offices` (`id`, `name`, `price`) VALUES
 (1, 'Cramped lil\' office', 25),
 (2, 'L-shaped office',      30),
 (3, 'T-shaped office',      35);
