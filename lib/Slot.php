@@ -7,7 +7,7 @@ class Slot extends Record {
 
 	public static $table = 'slots';
 
-	static function available ($service = null) {
+	static function available ($service = null, $service_id = null) {
 
 		$sql = 'SELECT s.*, COUNT(p.id) AS count
 			FROM `' . self::$table . '` s
@@ -15,12 +15,14 @@ class Slot extends Record {
 
 		if (!is_null($service))
 			$sql .= " WHERE service = '{$service}'";
+		if (!is_null($service_id))
+			$sql .= " AND service_id = '{$service_id}'";
 
 		$sql .= ' GROUP BY s.id HAVING count < s.quantity';
 		return self::queryInstantiate($sql);
 	}
 
-	static function soldOut ($service = null) {
+	static function soldOut ($service = null, $service_id = null) {
 
 		$sql = 'SELECT s.*, COUNT(p.id) AS count
 			FROM `' . Purchase::$table . '` p
@@ -28,6 +30,8 @@ class Slot extends Record {
 
 		if (!is_null($service))
 			$sql .= " WHERE service = '{$service}'";
+		if (!is_null($service_id))
+			$sql .= " AND service_id = '{$service_id}'";
 
 		$sql .= ' GROUP BY p.slot_id HAVING count >= s.quantity';
 		return self::queryInstantiate($sql);
