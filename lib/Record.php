@@ -110,6 +110,10 @@ abstract class Record {
 		return $this->find('id', $id, true);
 	}
 
+	public static function className ($service) {
+		return str_replace('-', '', ucwords($service, '-'));
+	}
+
 	/* overloaded functions for getting/setting fields */
 
 	public function __get ($field) {
