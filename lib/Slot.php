@@ -2,6 +2,9 @@
 
 include_once __DIR__ . '/Record.php';
 include_once __DIR__ . '/Purchase.php';
+include_once __DIR__ . '/PingPong.php';
+include_once __DIR__ . '/Seat.php';
+include_once __DIR__ . '/Office.php';
 
 class Slot extends Record {
 
@@ -57,6 +60,26 @@ class Slot extends Record {
 			$services[] = $result['service'];
 
 		return $services;
+	}
+
+	static function availableServices ($type) {
+
+		$service_class = self::className($type);
+		$table = $service_class::$table;
+
+		$sql = "SELECT DISTINCT (available.service_id), service.*
+			FROM (
+				SELECT s.*, COUNT(p.id) AS count
+				FROM `" . self::$table . "` s
+				LEFT JOIN `" . Purchase::$table . "` p ON p.slot_id = s.id
+				WHERE s.service = '{$type}'
+				GROUP BY s.id
+				HAVING count < s.quantity
+			) as available
+			LEFT JOIN `" . $service_class::$table . "` service ON service.id = available.service_id
+			ORDER BY service.price DESC";
+
+		return self::queryInstantiate($sql);
 	}
 }
 
