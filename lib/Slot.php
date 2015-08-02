@@ -37,14 +37,15 @@ class Slot extends Record {
 		return self::queryInstantiate($sql);
 	}
 
-	static function availableServices () {
+	static function availableServiceTypes () {
 
 		$sql = 'SELECT DISTINCT(available.service)
 			FROM (
 				SELECT s.*, COUNT(p.id) AS count
 				FROM `' . self::$table . '` s
 				LEFT JOIN `' . Purchase::$table . '` p ON p.slot_id = s.id
-				GROUP BY s.id HAVING count < s.quantity
+				GROUP BY s.id
+				HAVING count < s.quantity
 			) as available';
 
 		$results = self::query($sql);
