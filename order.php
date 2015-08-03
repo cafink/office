@@ -41,6 +41,21 @@
 
 </form>
 
+<script type="text/javascript">
+	$(function() {
+		$('#service').change(function() {
+
+			// Hide and disable all slot dropdowns.
+			$('.slot').hide();
+			$('.slot select').prop('disabled', true);
+
+			// Re-enable and display the one for the selected service.
+			$('.slot[data-service-id="' + $(this).val() + '"] select').prop('disabled', false);
+			$('.slot[data-service-id="' + $(this).val() + '"]').show();
+		});
+	});
+</script>
+
 <?php
 	$page['title'] = 'Order Form';
 	$page['content'] = ob_get_clean();
