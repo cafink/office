@@ -12,3 +12,7 @@ ul.error {
 	background-color: #fcc;
 	border: 1px solid #f33;
 }
+
+form div {
+	margin-bottom: 1em;
+}
