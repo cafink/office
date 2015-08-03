@@ -2,6 +2,10 @@
 
 include_once __DIR__ . '/Record.php';
 
-abstract class Service extends Record { }
+abstract class Service extends Record {
+
+	public static $single = false;
+
+}
 
 ?>
