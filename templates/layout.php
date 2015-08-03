@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/office.css">
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<title><?php if(isset($page['title'])) echo $page['title'] . ' - '; ?>Office Scheduler</title>
 	</head>
 	<body>
