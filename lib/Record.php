@@ -37,7 +37,7 @@ abstract class Record {
 	}
 
 	// Build a SQL query from field names & values
-	protected static function buildQuery ($fields = null, $values = null, $first = false) {
+	protected static function buildSelectQuery ($fields = null, $values = null, $first = false) {
 
 		$sql = 'SELECT * FROM `' . static::$table . '`';
 
@@ -100,7 +100,7 @@ abstract class Record {
 	// Find records by field names & values.
 	public static function find ($fields = null, $values = null, $first = false) {
 
-		$sql = self::buildQuery($fields, $values, $first);
+		$sql = self::buildSelectQuery($fields, $values, $first);
 		$instances = self::queryInstantiate($sql);
 
 		// We already limited the results to a single record in our
