@@ -33,8 +33,8 @@
 
 	<?php foreach ($services as $service) { ?>
 		<div class="slot" data-service-id="<?php echo $service->id; ?>"<?php if (!$service_class::$single) echo ' style="display: none;"'; ?>>
-			<label for="slot"><?php if (isset($service->name)) echo $service->name . ' '; ?>slot:</label></br />
-			<select name="slot"<?php if (!$service_class::$single) echo ' disabled'; ?>>
+			<label for="slot_id"><?php if (isset($service->name)) echo $service->name . ' '; ?>slot:</label></br />
+			<select name="slot_id"<?php if (!$service_class::$single) echo ' disabled'; ?>>
 				<option value="">- select -</option>
 				<?php
 					$slots = Slot::available($service_type, $service->id);
