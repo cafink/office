@@ -107,7 +107,7 @@ abstract class Record {
 
 	// Get a single record by id.
 	public static function get ($id) {
-		return $this->find('id', $id, true);
+		return self::find('id', $id, true);
 	}
 
 	public static function className ($service) {
