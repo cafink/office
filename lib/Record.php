@@ -10,17 +10,22 @@ abstract class Record {
 	// The record's data as an associative array.
 	protected $record;
 
+	public $new;
+
 	// The name of the database table.
 	public static $table;
 
 	function __construct ($record = null) {
 		$this->record = (is_null($record) ? array() : $record);
 		if (!is_array($this->record)) throw new RecordException('Record must be an array.');
+		$this->new = true;
 	}
 
 	// Create a record instance from an associative array.
 	protected static function instantiate ($data) {
-		return new static($data);
+		$instance = new static($data);
+		$instance->new = false;
+		return $instance;
 	}
 
 	protected static function instantiateArray ($data) {
