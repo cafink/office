@@ -122,7 +122,7 @@ abstract class Record {
 	}
 
 	public function __set ($field, $value) {
-		$this->row[$field] = $value;
+		$this->record[$field] = $value;
 	}
 
 }
