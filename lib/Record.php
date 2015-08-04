@@ -9,6 +9,7 @@ abstract class Record {
 
 	// The record's data as an associative array.
 	protected $record;
+	protected $primary_key = 'id';
 
 	public $new;
 
