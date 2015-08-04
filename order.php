@@ -2,6 +2,17 @@
 	include 'lib/Slot.php';
 	include 'lib/requireLogin.php';
 
+	if(isset($_POST['submit'])) {
+
+		$purchase = new Purchase($_POST);
+		$purchase->user_id = $_SESSION['user']->id;
+
+		if ($purchase->save()) {
+			header('Location: thanks.php');
+			die();
+		}
+	}
+
 	ob_start();
 
 	$service_type = $_GET['service'];
