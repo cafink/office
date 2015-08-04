@@ -11,6 +11,8 @@
 			header('Location: thanks.php');
 			die();
 		}
+
+		$errors = $purchase->errors;
 	}
 
 	ob_start();
@@ -20,6 +22,8 @@
 ?>
 
 <h1><?php echo ucwords($service_type, '-'); ?> Order Form</h1>
+
+<?php include 'templates/errors.php'; ?>
 
 <form action="order.php?service=<?php echo $service_type; ?>" method="post">
 
