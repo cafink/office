@@ -12,6 +12,7 @@ abstract class Record {
 	protected $primary_key = 'id';
 
 	public $new;
+	public $errors;
 
 	// The name of the database table.
 	public static $table;
@@ -92,10 +93,21 @@ abstract class Record {
 	}
 
 	public function save () {
+
+		$this->errors = $this->validate();
+		if (count($this->errors))
+			return false;
+
 		if ($this->new) {
 			$sql = $this->buildInsertQuery();
 			return self::query($sql);
 		}
+	}
+
+	// Validate data and return associative
+	// array of error messages.
+	public function validate () {
+		return array();
 	}
 
 	// Run a query; return results as array of records.
