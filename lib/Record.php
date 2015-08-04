@@ -88,7 +88,8 @@ abstract class Record {
 		}
 
 		$db->close();
-		$results = $results->fetch_all(MYSQLI_ASSOC);
+		if (is_object($results) && get_class($results) == 'mysqli_result')
+			$results = $results->fetch_all(MYSQLI_ASSOC);
 		return $results;
 	}
 
