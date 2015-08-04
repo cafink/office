@@ -81,6 +81,14 @@ class Slot extends Record {
 
 		return self::queryInstantiate($sql);
 	}
+
+	public function numSold () {
+		return count(Purchase::find('slot_id', $this->id));
+	}
+
+	public function numAvailable () {
+		return $this->quantity - $this->numSold();
+	}
 }
 
 ?>
