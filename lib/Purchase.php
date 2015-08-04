@@ -1,17 +1,26 @@
 <?php
 
 include_once __DIR__ . '/Record.php';
+include_once __DIR__ . '/Slot.php';
 
 class Purchase extends Record {
 
 	public static $table = 'purchases';
 
 	function validate () {
+
 		$errors = array();
+
 		if (empty($this->user_id))
 			$errors['user_id'] = 'User not specified.';
-		if (empty($this->slot_id))
+
+		if (empty($this->slot_id)) {
 			$errors['slot_id'] = 'Slot not specified.';
+		} else {
+			$slot = Slot::get($this->slot_id);
+			if ($slot->numAvailable() < 1)
+				$errors['slot_id'] = 'Slot not available.';
+		}
 
 		return $errors;
 	}
