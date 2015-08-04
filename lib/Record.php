@@ -63,6 +63,16 @@ abstract class Record {
 		return $sql;
 	}
 
+	public function fields () {
+		$results = $this->query('DESCRIBE ' . static::$table);
+
+		$fields = array();
+		foreach ($results as $result)
+			$fields[] = $result['Field'];
+
+		return $fields;
+	}
+
 	// Run a query; return results as array of records.
 	public static function query ($sql) {
 
