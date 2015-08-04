@@ -73,6 +73,31 @@ abstract class Record {
 		return $fields;
 	}
 
+	protected function buildInsertQuery () {
+
+		$db_fields = $this->fields();
+		$sql = 'INSERT INTO `' . static::$table . '` (';
+
+		$rec_fields = array();
+		$rec_values = array();
+		foreach ($db_fields as $field) {
+			if ($field != $this->primary_key && isset($this->$field)) {
+				$rec_fields[] = '`' . $field . '`';
+				$rec_values[] = "'" . $this->$field . "'";
+			}
+		}
+
+		$sql .= implode(', ', $rec_fields) . ') VALUES (' . implode(', ', $rec_values) . ')';
+		return $sql;
+	}
+
+	public function save () {
+		if ($this->new) {
+			$sql = $this->buildInsertQuery();
+			return self::query($sql);
+		}
+	}
+
 	// Run a query; return results as array of records.
 	public static function query ($sql) {
 
