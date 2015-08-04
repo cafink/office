@@ -1,5 +1,4 @@
 <?php
-	include 'lib/User.php';
 	include 'lib/Slot.php';
 	include 'lib/requireLogin.php';
 
