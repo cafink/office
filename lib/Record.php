@@ -131,6 +131,10 @@ abstract class Record {
 		$this->record[$field] = $value;
 	}
 
+	public function __isset ($field) {
+		return isset($this->record[$field]);
+	}
+
 }
 
 ?>
