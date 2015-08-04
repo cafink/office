@@ -11,7 +11,7 @@
 
 <h1><?php echo ucwords($service_type, '-'); ?> Order Form</h1>
 
-<form action="order.php" method="post">
+<form action="order.php?service=<?php echo $service_type; ?>" method="post">
 
 	<?php
 		if ($service_class::$single) {
