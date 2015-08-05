@@ -6,6 +6,7 @@
 
 		$purchase = new Purchase($_POST);
 		$purchase->user_id = $_SESSION['user']->id;
+		$purchase->purchased_at = date('Y-m-d H:i:s');
 
 		if ($purchase->save()) {
 			header('Location: thanks.php');

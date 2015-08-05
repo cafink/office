@@ -41,5 +41,6 @@ CREATE TABLE IF NOT EXISTS `purchases` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`user_id` int(11),
 	`slot_id` int(11),
+	`purchased_at` timestamp NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
