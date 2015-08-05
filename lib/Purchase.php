@@ -22,6 +22,9 @@ class Purchase extends Record {
 				$errors['slot_id'] = 'Slot not available.';
 		}
 
+		if ($this->alreadyBooked())
+			$errors['slot_id'] = 'You have already purchased a slot at that time.';
+
 		return $errors;
 	}
 
@@ -34,6 +37,25 @@ class Purchase extends Record {
 
 	function slot () {
 		return Slot::get($this->slot_id);
+	}
+
+	function time () {
+		$slot = $this->slot();
+		return $slot->time;
+	}
+
+	function alreadyBooked () {
+		$purchases = self::findByUserAndTime($this->user_id, $this->time());
+		return count($purchases) > 0;
+	}
+
+	static function findByUserAndTime ($user_id, $time) {
+		$sql = 'SELECT p.*
+			FROM `' . self::$table . '` p
+			LEFT JOIN `' . Slot::$table . "` s ON s.id = p.slot_id
+			WHERE p.user_id = {$user_id}
+			AND s.time = '{$time}'";
+		return self::queryInstantiate($sql);
 	}
 }
 
