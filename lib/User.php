@@ -6,7 +6,7 @@ class User extends Record {
 
 	public static $table = 'users';
 
-	function checkPassword ($password) {
+	public function checkPassword ($password) {
 
 		if ($this->password == $password)
 			return true;

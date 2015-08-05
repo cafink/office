@@ -10,7 +10,7 @@ class Slot extends Record {
 
 	public static $table = 'slots';
 
-	static function available ($service = null, $service_id = null) {
+	public static function available ($service = null, $service_id = null) {
 
 		$sql = 'SELECT s.*, COUNT(p.id) AS count
 			FROM `' . self::$table . '` s
@@ -25,7 +25,7 @@ class Slot extends Record {
 		return self::queryInstantiate($sql);
 	}
 
-	static function soldOut ($service = null, $service_id = null) {
+	public static function soldOut ($service = null, $service_id = null) {
 
 		$sql = 'SELECT s.*, COUNT(p.id) AS count
 			FROM `' . Purchase::$table . '` p
@@ -40,7 +40,7 @@ class Slot extends Record {
 		return self::queryInstantiate($sql);
 	}
 
-	static function availableServiceTypes () {
+	public static function availableServiceTypes () {
 
 		$sql = 'SELECT DISTINCT(available.service)
 			FROM (
@@ -62,7 +62,7 @@ class Slot extends Record {
 		return $services;
 	}
 
-	static function availableServices ($type) {
+	public static function availableServices ($type) {
 
 		$service_class = self::className($type);
 		$table = $service_class::$table;

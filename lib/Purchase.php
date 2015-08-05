@@ -7,7 +7,7 @@ class Purchase extends Record {
 
 	public static $table = 'purchases';
 
-	function validate () {
+	public function validate () {
 
 		$errors = array();
 
@@ -28,28 +28,28 @@ class Purchase extends Record {
 		return $errors;
 	}
 
-	function quantities () {
+	public function quantities () {
 		$sql = 'SELECT COUNT(*), `slot_id`
 			FROM `purchases`
 			GROUP BY `slot_id`';
 		return self::query($sql);
 	}
 
-	function slot () {
+	public function slot () {
 		return Slot::get($this->slot_id);
 	}
 
-	function time () {
+	public function time () {
 		$slot = $this->slot();
 		return $slot->time;
 	}
 
-	function alreadyBooked () {
+	public function alreadyBooked () {
 		$purchases = self::findByUserAndTime($this->user_id, $this->time());
 		return count($purchases) > 0;
 	}
 
-	static function findByUserAndTime ($user_id, $time) {
+	public static function findByUserAndTime ($user_id, $time) {
 		$sql = 'SELECT p.*
 			FROM `' . self::$table . '` p
 			LEFT JOIN `' . Slot::$table . "` s ON s.id = p.slot_id
