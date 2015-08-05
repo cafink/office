@@ -14,6 +14,16 @@ class User extends Record {
 		return false;
 	}
 
+	public static function withNoPurchases () {
+		$sql = 'SELECT *
+			FROM `' . self::$table . '`
+			WHERE ' . self::$primary_key . ' NOT IN (
+				SELECT DISTINCT(user_id)
+				FROM purchases
+			)';
+		return self::queryInstantiate($sql);
+	}
+
 }
 
 ?>
