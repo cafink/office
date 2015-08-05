@@ -9,7 +9,8 @@ abstract class Record {
 
 	// The record's data as an associative array.
 	protected $record;
-	protected $primary_key = 'id';
+
+	protected static $primary_key = 'id';
 
 	public $new;
 	public $errors;
@@ -82,7 +83,7 @@ abstract class Record {
 		$rec_fields = array();
 		$rec_values = array();
 		foreach ($db_fields as $field) {
-			if ($field != $this->primary_key && isset($this->$field)) {
+			if ($field != static::$primary_key && isset($this->$field)) {
 				$rec_fields[] = '`' . $field . '`';
 				$rec_values[] = "'" . $this->$field . "'";
 			}
