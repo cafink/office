@@ -57,6 +57,13 @@ class Purchase extends Record {
 			AND s.time = '{$time}'";
 		return self::queryInstantiate($sql);
 	}
+
+	public static function purchasesThisMonth () {
+		$sql = 'SELECT *
+			FROM `' . self::$table . "`
+			WHERE DATE_FORMAT(purchased_at, '%Y-%m') = '" . date('Y-m') . "'";
+		return self::queryInstantiate($sql);
+	}
 }
 
 ?>
