@@ -17,7 +17,7 @@ class Purchase extends Record {
 		if (empty($this->slot_id)) {
 			$errors['slot_id'] = 'Slot not specified.';
 		} else {
-			$slot = Slot::get($this->slot_id);
+			$slot = $this->slot();
 			if ($slot->numAvailable() < 1)
 				$errors['slot_id'] = 'Slot not available.';
 		}
@@ -30,6 +30,10 @@ class Purchase extends Record {
 			FROM `purchases`
 			GROUP BY `slot_id`';
 		return self::query($sql);
+	}
+
+	function slot () {
+		return Slot::get($this->slot_id);
 	}
 }
 
