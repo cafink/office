@@ -1,6 +1,6 @@
 <?php
 
-include_once 'lib/User.php';
+include_once 'lib/classes/User.php';
 
 session_start();
 if(!isset($_SESSION['user'])){

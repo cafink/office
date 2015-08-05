@@ -1,5 +1,5 @@
 <?php
-	include 'lib/Slot.php';
+	include 'lib/classes/Slot.php';
 	include 'lib/requireLogin.php';
 
 	if(isset($_POST['submit'])) {

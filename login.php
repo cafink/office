@@ -1,5 +1,5 @@
 <?php
-	include 'lib/User.php';
+	include 'lib/classes/User.php';
 
 	if(isset($_POST['submit'])) {
 

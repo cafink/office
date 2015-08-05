@@ -2,7 +2,7 @@
 
 	include 'lib/requireLogin.php';
 
-	include_once 'lib/Slot.php';
+	include_once 'lib/classes/Slot.php';
 
 	ob_start();
 
