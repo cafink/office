@@ -14,12 +14,13 @@ class Slot extends Record {
 
 		$sql = 'SELECT s.*, COUNT(p.id) AS count
 			FROM `' . self::$table . '` s
-			LEFT JOIN `' . Purchase::$table . '` p ON p.slot_id = s.id';
+			LEFT JOIN `' . Purchase::$table . '` p ON p.slot_id = s.id
+			WHERE s.time > NOW()';
 
 		if (!is_null($service))
-			$sql .= " WHERE service = '{$service}'";
+			$sql .= " AND s.service = '{$service}'";
 		if (!is_null($service_id))
-			$sql .= " AND service_id = '{$service_id}'";
+			$sql .= " AND s.service_id = '{$service_id}'";
 
 		$sql .= ' GROUP BY s.id HAVING count < s.quantity';
 		return self::queryInstantiate($sql);
@@ -47,6 +48,7 @@ class Slot extends Record {
 				SELECT s.*, COUNT(p.id) AS count
 				FROM `' . self::$table . '` s
 				LEFT JOIN `' . Purchase::$table . '` p ON p.slot_id = s.id
+				WHERE s.time > NOW()
 				GROUP BY s.id
 				HAVING count < s.quantity
 			) as available';
@@ -73,6 +75,7 @@ class Slot extends Record {
 				FROM `" . self::$table . "` s
 				LEFT JOIN `" . Purchase::$table . "` p ON p.slot_id = s.id
 				WHERE s.service = '{$type}'
+				AND s.time > NOW()
 				GROUP BY s.id
 				HAVING count < s.quantity
 			) as available

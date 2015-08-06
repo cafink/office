@@ -25,6 +25,9 @@ class Purchase extends Record {
 		if ($this->alreadyBooked())
 			$errors['slot_id'] = 'You have already purchased a slot at that time.';
 
+		if ($this->inThePast())
+			$errors['slot_id'] = 'You cannot purchase a slot in the past.';
+
 		return $errors;
 	}
 
@@ -47,6 +50,10 @@ class Purchase extends Record {
 	public function alreadyBooked () {
 		$purchases = self::findByUserAndTime($this->user_id, $this->time());
 		return count($purchases) > 0;
+	}
+
+	public function inThePast () {
+		return $this->time() < date('Y-m-d H:i:s');
 	}
 
 	public static function findByUserAndTime ($user_id, $time) {
