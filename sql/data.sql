@@ -1,10 +1,10 @@
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `color`, `password`) VALUES
 (1, 'Alice', 'Smith',    'alice@example.com', 'Azure',     'password'),
 (2, 'Bob',   'Johnson',  'bob@example.com',   'Burgundy',  '123'),
-(3, 'Carol', 'Williams', 'carol@example.com', 'Cerulean',  'password'),
-(4, 'Dan',   'Brown',    'dan@example.com',   'Dandelion', '123'),
-(5, 'Erin',  'Jones',    'erin@example.com',  'Ecru',      'password'),
-(6, 'Frank', 'Miller',   'frank@example.com', 'Fuchsia',   '123');
+(3, 'Carol', 'Williams', 'carol@example.com', 'Azure',  'password'),
+(4, 'Dan',   'Brown',    'dan@example.com',   'Burgundy', '123'),
+(5, 'Erin',  'Jones',    'erin@example.com',  'Azure',      'password'),
+(6, 'Frank', 'Miller',   'frank@example.com', 'Burgundy',   '123');
 
 INSERT INTO `ping-pong` (`id`, `price`) VALUES
 (1, 5);

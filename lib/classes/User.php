@@ -24,6 +24,27 @@ class User extends Record {
 		return self::queryInstantiate($sql);
 	}
 
+	public static function purchasesByColor () {
+		$sql = "SELECT
+				color,
+				GROUP_CONCAT(CONCAT(name, ' (', count, ')') SEPARATOR ', ') AS services
+			FROM (
+				SELECT
+					u.color,
+					IFNULL(COALESCE(s2.name, s3.name), 'Ping-Pong') AS name,
+					COUNT(IFNULL(COALESCE(s2.name, s3.name), 'Ping-Pong')) AS count
+				FROM `" . Purchase::$table . "` p
+				LEFT JOIN `" . User::$table . "` u ON u.id = p.user_id
+				LEFT JOIN `" . Slot::$table . "` s ON s.id = p.slot_id
+				LEFT JOIN `" . PingPong::$table . "` s1 ON s.service = 'ping-pong' AND s1.id = s.service_id
+				LEFT JOIN `" . Seat::$table . "` s2 ON s.service = 'seat' AND s2.id = s.service_id
+				LEFT JOIN `" . Office::$table . "` s3 ON s.service = 'office' AND s3.id = s.service_id
+				GROUP BY u.color, s.service, s.service_id
+			) counts
+			GROUP BY color";
+		return self::query($sql);
+	}
+
 }
 
 ?>
