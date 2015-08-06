@@ -8,7 +8,10 @@
 
 <h1>Reports</h1>
 
-<p><strong><?php echo count(Purchase::purchasesThisMonth()); ?></strong> packages have been sold this month.</p>
+<p>
+	<strong><?php echo count(Purchase::purchasesThisMonth()); ?></strong>
+	packages have been sold this month.
+</p>
 
 <p>Services purchased by favorite color:</p>
 <ul>
@@ -19,7 +22,10 @@
 	?>
 </ul>
 
-<p><strong><?php echo count(User::withNoPurchases()); ?></strong> users in the system haven't purchased a package yet.</p>
+<p>
+	<strong><?php echo count(User::withNoPurchases()); ?></strong>
+	users in the system haven't purchased a package yet.
+</p>
 
 <?php
 	$page['title'] = 'Reports';
