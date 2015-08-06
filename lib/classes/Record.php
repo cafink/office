@@ -54,7 +54,7 @@ abstract class Record {
 
 			$conditions = array();
 			foreach ($fields as $i => $field)
-				$conditions[] = $field . " = '{$values[$i]}'";
+				$conditions[] = $field . " = '" . mysql_escape_string($values[$i]) . "'";
 
 			$sql .= implode(' AND ', $conditions);
 		}
@@ -85,7 +85,7 @@ abstract class Record {
 		foreach ($db_fields as $field) {
 			if ($field != static::$primary_key && isset($this->$field)) {
 				$rec_fields[] = '`' . $field . '`';
-				$rec_values[] = "'" . $this->$field . "'";
+				$rec_values[] = "'" . mysql_escape_string($this->$field) . "'";
 			}
 		}
 

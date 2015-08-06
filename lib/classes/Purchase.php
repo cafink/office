@@ -60,8 +60,8 @@ class Purchase extends Record {
 		$sql = 'SELECT p.*
 			FROM `' . self::$table . '` p
 			LEFT JOIN `' . Slot::$table . "` s ON s.id = p.slot_id
-			WHERE p.user_id = {$user_id}
-			AND s.time = '{$time}'";
+			WHERE p.user_id = " . mysql_escape_string($user_id) . "
+			AND s.time = '" . mysql_escape_string($time) . "'";
 		return self::queryInstantiate($sql);
 	}
 

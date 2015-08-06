@@ -18,9 +18,9 @@ class Slot extends Record {
 			WHERE s.time > NOW()';
 
 		if (!is_null($service))
-			$sql .= " AND s.service = '{$service}'";
+			$sql .= " AND s.service = '" . mysql_escape_string($service) . "'";
 		if (!is_null($service_id))
-			$sql .= " AND s.service_id = '{$service_id}'";
+			$sql .= " AND s.service_id = '" . mysql_escape_string($service_id) . "'";
 
 		$sql .= ' GROUP BY s.id HAVING count < s.quantity';
 		return self::queryInstantiate($sql);
@@ -33,9 +33,9 @@ class Slot extends Record {
 			LEFT JOIN `' . self::$table . '` s ON s.id = p.slot_id';
 
 		if (!is_null($service))
-			$sql .= " WHERE service = '{$service}'";
+			$sql .= " WHERE service = '" . mysql_escape_string($service) . "'";
 		if (!is_null($service_id))
-			$sql .= " AND service_id = '{$service_id}'";
+			$sql .= " AND service_id = '" . mysql_escape_string($service_id) . "'";
 
 		$sql .= ' GROUP BY p.slot_id HAVING count >= s.quantity';
 		return self::queryInstantiate($sql);
@@ -74,7 +74,7 @@ class Slot extends Record {
 				SELECT s.*, COUNT(p.id) AS count
 				FROM `" . self::$table . "` s
 				LEFT JOIN `" . Purchase::$table . "` p ON p.slot_id = s.id
-				WHERE s.service = '{$type}'
+				WHERE s.service = '" . mysql_escape_string($type) . "'
 				AND s.time > NOW()
 				GROUP BY s.id
 				HAVING count < s.quantity
