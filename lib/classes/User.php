@@ -27,7 +27,7 @@ class User extends Record {
 	public static function purchasesByColor () {
 		$sql = "SELECT
 				color,
-				GROUP_CONCAT(CONCAT(name, ' (', count, ')') SEPARATOR ', ') AS services
+				GROUP_CONCAT(CONCAT(name, ' (', count, ')') ORDER BY count DESC SEPARATOR ', ') AS services
 			FROM (
 				SELECT
 					u.color,
