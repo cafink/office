@@ -10,9 +10,9 @@ INSERT INTO `ping-pong` (`id`, `price`) VALUES
 (1, 5);
 
 INSERT INTO `seats` (`id`, `name`, `price`) VALUES
-(1, 'Middle',  5),
-(2, 'Aisle',  10),
-(3, 'Window', 15);
+(1, 'Middle seat',  5),
+(2, 'Aisle seat',  10),
+(3, 'Window seat', 15);
 
 INSERT INTO `offices` (`id`, `name`, `price`) VALUES
 (1, 'Cramped lil\' office', 25),
