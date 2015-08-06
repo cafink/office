@@ -16,6 +16,12 @@
 		$errors = $purchase->errors;
 	}
 
+	// Redirect to homepage if no service is specified.
+	if (!isset($_GET['service'])) {
+		header('Location: index.php');
+		die();
+	}
+
 	ob_start();
 
 	$service_type = $_GET['service'];
