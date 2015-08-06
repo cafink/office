@@ -45,22 +45,30 @@
 				<option value="">- select -</option>
 				<?php
 					$services = Slot::availableServices($service_type);
-					foreach ($services as $service)
-						echo '<option value="' . $service->id . '">' . $service->name . '</option>'
+					foreach ($services as $service) {
+						echo '<option value="' . $service->id . '"';
+						if (isset($_POST['service']) && $_POST['service'] == $service->id)
+							echo ' selected';
+						echo '>' . $service->name . '</option>';
+					}
 				?>
 			</select>
 		</div>
 	<?php } ?>
 
 	<?php foreach ($services as $service) { ?>
-		<div class="slot" data-service-id="<?php echo $service->id; ?>"<?php if (!$service_class::$single) echo ' style="display: none;"'; ?>>
+		<div class="slot" data-service-id="<?php echo $service->id; ?>"<?php if (!$service_class::$single && (!isset($_POST['service']) || $service->id != $_POST['service'])) echo ' style="display: none;"'; ?>>
 			<label for="slot_id"><?php if (isset($service->name)) echo $service->name . ' '; ?>slot:</label></br />
-			<select name="slot_id"<?php if (!$service_class::$single) echo ' disabled'; ?>>
+			<select name="slot_id"<?php if (!$service_class::$single && (!isset($_POST['service']) || $service->id != $_POST['service'])) echo ' disabled'; ?>>
 				<option value="">- select -</option>
 				<?php
 					$slots = Slot::available($service_type, $service->id);
-					foreach ($slots as $slot)
-						echo '<option value="' . $slot->id . '">' . $slot->time . '</option>';
+					foreach ($slots as $slot) {
+						echo '<option value="' . $slot->id . '"';
+						if (isset($_POST['slot_id']) && $_POST['slot_id'] == $slot->id)
+							echo ' selected';
+						echo '>' . $slot->time . '</option>';
+					}
 				?>
 			</select>
 		</div>

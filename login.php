@@ -31,7 +31,7 @@
 
 	<div>
 		<label for="email">e-mail address:</label><br />
-		<input type="text" name="email" />
+		<input type="text" name="email"<?php if (isset($_POST['email'])) echo " value=\"{$_POST['email']}\""; ?> />
 	</div>
 
 	<div>
