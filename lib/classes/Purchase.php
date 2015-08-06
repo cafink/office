@@ -18,15 +18,16 @@ class Purchase extends Record {
 			$errors['slot_id'] = 'Slot not specified.';
 		} else {
 			$slot = $this->slot();
-			if ($slot->numAvailable() < 1)
+			if ($slot->numAvailable() < 1) {
 				$errors['slot_id'] = 'Slot not available.';
+			} else {
+				if ($this->inThePast())
+					$errors['slot_id'] = 'You cannot purchase a slot in the past.';
+				elseif ($this->alreadyBooked())
+					$errors['slot_id'] = 'You have already purchased a slot at that time.';
+			}
 		}
 
-		if ($this->alreadyBooked())
-			$errors['slot_id'] = 'You have already purchased a slot at that time.';
-
-		if ($this->inThePast())
-			$errors['slot_id'] = 'You cannot purchase a slot in the past.';
 
 		return $errors;
 	}
